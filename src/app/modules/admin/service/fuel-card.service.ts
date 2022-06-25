@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
-import {urls} from "../constants/urls";
-import {IFuelCard} from "../interfaces";
+import {urls} from "../../../constants";
+import {IFuelCard} from "../../../interfaces";
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +21,11 @@ export class FuelCardService {
     return this.httpClient.get<IFuelCard>(`${urls.fuel_card}/${id}`)
   }
 
-  create(fuelCard: IFuelCard): Observable<IFuelCard[]> {
-    return this.httpClient.post<IFuelCard[]>(urls.fuel_card, fuelCard);
+  create(fuelCard: IFuelCard): Observable<IFuelCard> {
+    return this.httpClient.post<IFuelCard>(urls.fuel_card, fuelCard);
   }
 
-  update(id: string, fuelCard: Partial<IFuelCard>): Observable<IFuelCard> {
+  update(id: number, fuelCard: Partial<IFuelCard>): Observable<IFuelCard> {
     return this.httpClient.patch<IFuelCard>(`${urls.fuel_card}/${id}`, fuelCard);
   }
 

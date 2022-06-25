@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FuelCardService} from "../../../../service";
-import {IFuelCard} from "../../../../interfaces";
-import {MatTableDataSource} from '@angular/material/table';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatTableDataSource} from '@angular/material/table';
+
+import {FuelCardService} from "../../service";
+import {IFuelCard} from "../../../../interfaces";
+import {RegEx} from "../../../../constants";
+
 
 @Component({
   selector: 'app-fuel-card',
@@ -15,7 +18,12 @@ export class FuelCardsComponent implements OnInit {
 
   fuelCards: MatTableDataSource<IFuelCard>;
 
+  fuelCardsArr: IFuelCard[];
+
   fuelCardForm: FormGroup;
+
+  cardForUpdate: IFuelCard | null;
+
 
   constructor(private fuelCardService: FuelCardService) {
     this._createForm()
@@ -23,7 +31,8 @@ export class FuelCardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fuelCardService.findAll().subscribe(value => {
-      this.fuelCards = new MatTableDataSource(value)
+      this.fuelCardsArr = value;
+      this.createTable()
     });
   }
 
@@ -34,18 +43,54 @@ export class FuelCardsComponent implements OnInit {
 
   _createForm(): void {
     this.fuelCardForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+      number: new FormControl(null, Validators.required),
+      pin: new FormControl(null, [Validators.required, Validators.pattern(RegEx.pin)]),
+      station_brend: new FormControl(null, [Validators.required]),
+      active: new FormControl(false, Validators.required),
     })
   }
 
-  edit(id: string) {
-    console.log(id);
+  edit(card: IFuelCard):void {
+    this.cardForUpdate = card;
+    this.fuelCardForm.setValue({
+      number: card.number,
+      pin: card.pin,
+      active: card.active,
+      station_brend: card.station_brend
+    })
   }
 
   delete(id: string) {
-    this.fuelCardService.delete(id).subscribe(value => {
-      this.fuelCardService.findAll().subscribe(value1 => this.fuelCards = new MatTableDataSource(value1))
+    this.fuelCardService.delete(id).subscribe(() => {
+      const index = this.fuelCardsArr.findIndex(card => card.id === +id);
+      this.fuelCardsArr.splice(index, 1)
+      this.createTable()
     })
+    // this.fuelCardService.delete(id).subscribe(value => {
+    //   this.fuelCardService.findAll().subscribe(value1 => this.fuelCards = new MatTableDataSource(value1))
+    // })
+  }
+
+
+  save(): void {
+
+    if (!this.cardForUpdate) {
+      this.fuelCardService.create(this.fuelCardForm.getRawValue()).subscribe(value => {
+        this.fuelCardsArr.push(value);
+        this.fuelCardForm.reset();
+      })
+    } else {
+      this.fuelCardService.update(this.cardForUpdate.id, this.fuelCardForm.value).subscribe(value => {
+        let fuelCard = this.fuelCardsArr.find(f => f.id === this.cardForUpdate?.id);
+        Object.assign(fuelCard, value);
+        this.cardForUpdate = null;
+        this.fuelCardForm.reset();
+      })
+    }
+    this.createTable()
+  }
+
+  createTable(): void {
+    this.fuelCards = new MatTableDataSource(this.fuelCardsArr);
   }
 }

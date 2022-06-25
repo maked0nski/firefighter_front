@@ -7,10 +7,10 @@
   justify-content: space-between;
 }
 
-.login_input {
+.register_input {
   max-width: calc(100% - 180px);
 }
 
-.login_button {
+.register_button {
   display: table-row;
 }

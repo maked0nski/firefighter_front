@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {LoginService} from "../service/login.service";
 import {Router} from "@angular/router";
+
+import {LoginService} from "../../services/login.service";
+import {TokenStorageService} from "../../../../services";
 
 
 @Component({
@@ -12,8 +14,15 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  showPassword: boolean = false;
+  emailError: string;
 
-  constructor(private loginService: LoginService, private router: Router) {
+
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private tokenStorageService: TokenStorageService,
+  ) {
     this._createForm();
   }
 
@@ -23,11 +32,21 @@ export class LoginComponent implements OnInit {
   _createForm(): void {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
     })
   }
 
   login() {
-    console.log(this.loginForm.getRawValue());
+    this.loginService.login(this.loginForm.getRawValue()).subscribe({
+      next: (value) => {
+        this.tokenStorageService.setToken(value);
+        this.router.navigate(['admin']);
+      },
+      error: e => this.emailError = e.error.message
+    })
+  }
+
+  showHidePassword() {
+    this.showPassword = !this.showPassword;
   }
 }

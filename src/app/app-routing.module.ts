@@ -5,11 +5,13 @@ import {MainLayoutComponent} from "./layout/main-layout/main-layout.component";
 import {NotFoundComponent} from "./layout/not-found/not-found.component";
 
 const routes: Routes = [
+
   {
     path: '', component: MainLayoutComponent, children: [
-      {path: '',redirectTo:'login', pathMatch: 'full'},
+      {path: '', redirectTo: 'login', pathMatch: 'full'},
       {path:'login', loadChildren:() => import('./modules').then(m => m.LoginModule)},
       {path:'admin', loadChildren:() => import('./modules').then(m => m.AdminModule)},
+      {path:'register', loadChildren:() => import('./modules').then(m => m.RegisterModule)},
     ]
   },
   {path:'**', component:NotFoundComponent}

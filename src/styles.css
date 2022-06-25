@@ -252,7 +252,7 @@ mat-card-actions{
   line-height: 23px;
   padding: 24px;
 }
-app-login .mat-card{
+app-login .mat-card, app-register .mat-card{
   margin: 5% auto !important;
 }
 .mat-card .mat-card-image {

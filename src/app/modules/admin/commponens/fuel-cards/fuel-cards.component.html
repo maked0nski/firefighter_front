@@ -6,37 +6,54 @@
     </mat-card-subtitle>
 
     <mat-accordion class="example-headers-align" multi>
-      <mat-expansion-panel>
+      <mat-expansion-panel (closed)="false">
         <mat-expansion-panel-header>
+
           <mat-panel-title>
             Додати паливну картку
           </mat-panel-title>
+
           <mat-panel-description>
             Тут можна додати додати паливну картку
             <mat-icon>payment</mat-icon>
           </mat-panel-description>
+
         </mat-expansion-panel-header>
-        <form [formGroup]="fuelCardForm">
+
+
+        <form [formGroup]="fuelCardForm" class="my-form">
+
           <mat-form-field appearance="fill">
             <mat-label>№ карти</mat-label>
-            <input matInput>
+            <input matInput formControlName="number">
           </mat-form-field>
 
           <mat-form-field appearance="fill">
             <mat-label>Пін код</mat-label>
-            <input matInput type="number" min="4">
+            <input matInput formControlName="pin">
           </mat-form-field>
 
           <mat-form-field appearance="fill">
+            <mat-select required formControlName="station_brend">
+              <mat-option value="WOG">WOG</mat-option>
+              <mat-option value="OKKO">OKKO</mat-option>
+            </mat-select>
             <mat-label>Заправка</mat-label>
-            <input matInput>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
+            <mat-select required formControlName="active">
+              <mat-option [value]="true">Активна</mat-option>
+              <mat-option [value]="false">Не активна</mat-option>
+            </mat-select>
             <mat-label>Чи діюча картка</mat-label>
-            <input matInput>
           </mat-form-field>
+
+          <mat-action-row>
+            <button mat-raised-button (click)="save()">{{!cardForUpdate ? "Створити" : "Оновити"}}</button>
+          </mat-action-row>
         </form>
+
       </mat-expansion-panel>
     </mat-accordion>
 
@@ -62,7 +79,7 @@
       <!-- Active Column -->
       <ng-container matColumnDef="active">
         <th mat-header-cell *matHeaderCellDef> Статус</th>
-        <td mat-cell *matCellDef="let element" >
+        <td mat-cell *matCellDef="let element">
           <ng-template [ngIf]="element.active">
             Активна
           </ng-template>
@@ -82,7 +99,7 @@
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button mat-raised-button (click)="edit(element.id)"> Редагувати</button>
+          <button mat-raised-button (click)="edit(element)"> Редагувати</button>
         </td>
       </ng-container>
 
