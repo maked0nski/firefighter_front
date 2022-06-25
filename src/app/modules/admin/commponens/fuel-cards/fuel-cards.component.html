@@ -6,7 +6,7 @@
     </mat-card-subtitle>
 
     <mat-accordion class="example-headers-align" multi>
-      <mat-expansion-panel (closed)="false">
+      <mat-expansion-panel (closed)="false" #mapanel="matExpansionPanel">
         <mat-expansion-panel-header>
 
           <mat-panel-title>
@@ -99,7 +99,7 @@
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button mat-raised-button (click)="edit(element)"> Редагувати</button>
+          <button mat-raised-button (click)="edit(element) "> Редагувати</button>
         </td>
       </ng-container>
 

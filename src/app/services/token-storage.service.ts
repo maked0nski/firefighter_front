@@ -22,15 +22,16 @@ export class TokenStorageService {
     return localStorage.getItem(this.refreshTokenKey) as string;
   }
 
+
+
   deleteToken(): void {
     localStorage.removeItem(this.accessTokenKey);
+    localStorage.removeItem(this.refreshTokenKey);
   }
 
   isAuthorization(): boolean {
     return !!localStorage.getItem(this.accessTokenKey)
   }
 
-  refrashTokens(){
 
-  }
 }

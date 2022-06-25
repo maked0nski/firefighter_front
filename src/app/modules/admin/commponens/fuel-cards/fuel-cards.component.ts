@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatTableDataSource} from '@angular/material/table';
+import {MatExpansionPanel} from "@angular/material/expansion";
 
 import {FuelCardService} from "../../service";
 import {IFuelCard} from "../../../../interfaces";
 import {RegEx} from "../../../../constants";
+
 
 
 @Component({
@@ -24,6 +26,9 @@ export class FuelCardsComponent implements OnInit {
 
   cardForUpdate: IFuelCard | null;
 
+  // panelOpenState = false;
+
+  @ViewChild(MatExpansionPanel) pannel?: MatExpansionPanel;
 
   constructor(private fuelCardService: FuelCardService) {
     this._createForm()
@@ -50,7 +55,7 @@ export class FuelCardsComponent implements OnInit {
     })
   }
 
-  edit(card: IFuelCard):void {
+  edit(card: IFuelCard): void {
     this.cardForUpdate = card;
     this.fuelCardForm.setValue({
       number: card.number,
@@ -58,6 +63,8 @@ export class FuelCardsComponent implements OnInit {
       active: card.active,
       station_brend: card.station_brend
     })
+    if(!this.pannel){return}
+    this.pannel.open()
   }
 
   delete(id: string) {
@@ -66,9 +73,7 @@ export class FuelCardsComponent implements OnInit {
       this.fuelCardsArr.splice(index, 1)
       this.createTable()
     })
-    // this.fuelCardService.delete(id).subscribe(value => {
-    //   this.fuelCardService.findAll().subscribe(value1 => this.fuelCards = new MatTableDataSource(value1))
-    // })
+
   }
 
 
@@ -78,6 +83,7 @@ export class FuelCardsComponent implements OnInit {
       this.fuelCardService.create(this.fuelCardForm.getRawValue()).subscribe(value => {
         this.fuelCardsArr.push(value);
         this.fuelCardForm.reset();
+        this.createTable();
       })
     } else {
       this.fuelCardService.update(this.cardForUpdate.id, this.fuelCardForm.value).subscribe(value => {
@@ -85,9 +91,12 @@ export class FuelCardsComponent implements OnInit {
         Object.assign(fuelCard, value);
         this.cardForUpdate = null;
         this.fuelCardForm.reset();
+        this.createTable();
       })
     }
-    this.createTable()
+
+    if(!this.pannel){return}
+    this.pannel.close();
   }
 
   createTable(): void {
