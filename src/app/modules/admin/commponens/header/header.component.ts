@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../../../../services";
+import {DataService} from "../../../../services";
+import {IUser} from "../../intesface";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  userData :IUser | undefined
+
+  constructor(
+    private authService: AuthService,
+    private dataService: DataService
+  ) { }
 
   ngOnInit(): void {
+    this.dataService.userStorage.subscribe(value => {
+      this.userData = value
+    })
   }
 
+  logout() {
+    this.authService.logout()
+  }
 }

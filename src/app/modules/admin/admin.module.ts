@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {IMaskModule} from 'angular-imask';
+import {ReactiveFormsModule} from "@angular/forms";
 
 import {MaterialModule} from "../../material-module";
 import {AdminRoutingModule} from './admin-routing.module';
@@ -12,8 +14,10 @@ import {SharedModule} from './shared/shared.module';
 import {SidebarComponent} from "./commponens/sidebar/sidebar.component";
 import {FuelCardsComponent} from './commponens/fuel-cards/fuel-cards.component';
 import {FuelCardService} from "./service";
-import {ReactiveFormsModule} from "@angular/forms";
 import {MainInterceptor} from "../../main.interceptor";
+import { UserProfileComponent } from './commponens/user-profile/user-profile.component';
+import { SimCardComponent } from './commponens/sim-card/sim-card.component';
+import { PositionComponent } from './commponens/position/position.component';
 
 
 @NgModule({
@@ -24,6 +28,9 @@ import {MainInterceptor} from "../../main.interceptor";
     ToolbarComponent,
     SidebarComponent,
     FuelCardsComponent,
+    UserProfileComponent,
+    SimCardComponent,
+    PositionComponent,
   ],
   exports: [
     SidebarComponent,
@@ -34,7 +41,8 @@ import {MainInterceptor} from "../../main.interceptor";
     MaterialModule,
     SharedModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IMaskModule
   ],
   providers: [
     FuelCardService,

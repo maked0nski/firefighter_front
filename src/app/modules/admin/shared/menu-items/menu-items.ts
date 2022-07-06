@@ -9,7 +9,8 @@ export interface Menu {
 
 const MENUITEMS = [
   {state: 'fuel_card', name: 'Паливні картки', type: 'link', icon: 'payment'},
-  {state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer'},
+  {state: 'sim_card', name: 'Сім картки', type: 'link', icon: 'sim_card'},
+  {state: 'position', name: 'Посади', type: 'link', icon: 'assignment_ind'},
   {state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5'},
   {state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy'},
   {state: 'lists', type: 'link', name: 'Lists', icon: 'view_list'},

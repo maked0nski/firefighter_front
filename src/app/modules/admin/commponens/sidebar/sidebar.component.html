@@ -3,21 +3,21 @@
 <!-- ============================================================== -->
 <div class="user-profile" style="background: url(assets/images/background/user-info.jpg) no-repeat;">
   <!-- User profile image -->
-  <div class="profile-img"> <img src="assets/images/users/profile.png" alt="user"> </div>
+  <a routerLink="/admin/userProfile"><div class="profile-img"   *ngIf="userData"> <img src="{{userData.image}}" alt="user"> </div></a>
   <!-- User profile text-->
   <!-- ============================================================== -->
   <!-- Profile - style you can find in header.scss -->
   <!-- ============================================================== -->
-  <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class=""> Markarn Doe <i class="ti-angle-down font-12 m-l-5"></i></a></div>
+  <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class="" *ngIf="userData"> {{userData.surename ? userData.surename : 'Не заповнено'}} {{userData.name ? userData.name : 'Не заповнено'}} <i class="ti-angle-down font-12 m-l-5"></i></a></div>
   <mat-menu #sdprofile="matMenu" class="mymegamenu">
     <button mat-menu-item>
-      <mat-icon>settings</mat-icon> Settings </button>
+      <mat-icon>settings</mat-icon> Налаштування </button>
+    <button mat-menu-item routerLink="/admin/userProfile">
+      <mat-icon>account_box</mat-icon> Профіль </button>
     <button mat-menu-item>
-      <mat-icon>account_box</mat-icon> Profile </button>
-    <button mat-menu-item>
-      <mat-icon>notifications_off</mat-icon> Disable notifications </button>
-    <button mat-menu-item>
-      <mat-icon>exit_to_app</mat-icon> Sign Out </button>
+      <mat-icon>notifications_off</mat-icon> Відключити нагадування </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon> Вийти з аккаунта </button>
   </mat-menu>
 
 </div>
