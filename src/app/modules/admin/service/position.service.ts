@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {IPosition} from "../../../interfaces/position";
+import {IPosition} from "../../../interfaces";
 import {urls} from "../../../constants";
 import {Observable} from "rxjs";
 

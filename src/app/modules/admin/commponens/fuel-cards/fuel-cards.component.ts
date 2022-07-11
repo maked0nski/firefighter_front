@@ -23,9 +23,9 @@ export class FuelCardsComponent implements OnInit {
 
   fuelCardsArr: IFuelCard[];
 
-  fuelCardForm: FormGroup;
+  form: FormGroup;
 
-  cardForUpdate: IFuelCard | null;
+  forUpdate: IFuelCard | null;
 
   @ViewChild(MatExpansionPanel) pannel?: MatExpansionPanel;
 
@@ -44,11 +44,11 @@ export class FuelCardsComponent implements OnInit {
   }
 
   _createForm(): void {
-    this.fuelCardForm = new FormGroup({
+    this.form = new FormGroup({
       number: new FormControl(null, Validators.required),
       pin: new FormControl(null, [Validators.required, Validators.pattern(RegEx.pin)]),
       station_brend: new FormControl(null, [Validators.required]),
-      active: new FormControl(false, Validators.required),
+      active: new FormControl(true, Validators.required),
     })
   }
 
@@ -58,8 +58,9 @@ export class FuelCardsComponent implements OnInit {
   }
 
   edit(card: IFuelCard): void {
-    this.cardForUpdate = card;
-    this.fuelCardForm.setValue({
+    this.forUpdate = card;
+    console.log(card)
+    this.form.setValue({
       number: card.number,
       pin: card.pin,
       active: card.active,
@@ -80,20 +81,20 @@ export class FuelCardsComponent implements OnInit {
   }
 
   save(): void {
-    if (!this.cardForUpdate) {
-      this.fuelCardService.create(this.fuelCardForm.getRawValue()).subscribe(value => {
+    if (!this.forUpdate) {
+      this.fuelCardService.create(this.form.getRawValue()).subscribe(value => {
         this.fuelCardsArr.push(value);
-        this.fuelCardForm.reset();
-        // this.fuelCardForm.untouched;
+        this.form.reset();
+        // this.form.untouched;
         this.createTable();
       })
     } else {
-      this.fuelCardService.update(this.cardForUpdate.id, this.fuelCardForm.getRawValue()).subscribe(value => {
-        let fuelCard = this.fuelCardsArr.find(f => f.id === this.cardForUpdate?.id);
+      this.fuelCardService.update(this.forUpdate.id, this.form.getRawValue()).subscribe(value => {
+        let fuelCard = this.fuelCardsArr.find(f => f.id === this.forUpdate?.id);
         Object.assign(fuelCard, value);
-        this.cardForUpdate = null;
-        this.fuelCardForm.reset();
-        // this.fuelCardForm.untouched;
+        this.forUpdate = null;
+        this.form.reset();
+        // this.form.untouched;
         this.createTable();
       })
     }

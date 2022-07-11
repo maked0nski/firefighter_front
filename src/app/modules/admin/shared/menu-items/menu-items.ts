@@ -8,15 +8,15 @@ export interface Menu {
 }
 
 const MENUITEMS = [
-  {state: 'fuel_card', name: 'Паливні картки', type: 'link', icon: 'payment'},
-  {state: 'sim_card', name: 'Сім картки', type: 'link', icon: 'sim_card'},
-  {state: 'position', name: 'Посади', type: 'link', icon: 'assignment_ind'},
-  {state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5'},
-  {state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy'},
-  {state: 'lists', type: 'link', name: 'Lists', icon: 'view_list'},
-  {state: 'menu', type: 'link', name: 'Menu', icon: 'view_headline'},
-  {state: 'tabs', type: 'link', name: 'Tabs', icon: 'tab'},
-  {state: 'stepper', type: 'link', name: 'Stepper', icon: 'web'},
+  {state: 'fuel_cards', name: 'Паливні картки', type: 'link', icon: 'payment'},
+  {state: 'sim_cards', name: 'Сім картки', type: 'link', icon: 'sim_card'},
+  {state: 'positions', name: 'Посади', type: 'link', icon: 'assignment_ind'},
+  {state: 'clients', name: 'Фірми-клієнти', type: 'link', icon: 'business'},
+  {state: 'cars', name: 'Автомобілі', type: 'link', icon: 'directions_car'},
+  {state: 'lists', name: 'Lists', type: 'link', icon: 'view_list'},
+  {state: 'menu', name: 'Menu', type: 'link', icon: 'view_headline'},
+  {state: 'tabs', name: 'Tabs', type: 'link', icon: 'tab'},
+  {state: 'stepper', name: 'Stepper', type: 'link', icon: 'web'},
   {
     state: 'expansion',
     type: 'link',

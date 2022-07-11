@@ -18,6 +18,13 @@ import {MainInterceptor} from "../../main.interceptor";
 import { UserProfileComponent } from './commponens/user-profile/user-profile.component';
 import { SimCardComponent } from './commponens/sim-card/sim-card.component';
 import { PositionComponent } from './commponens/position/position.component';
+import { ClientsComponent } from './commponens/clients/clients.component';
+import { CarsComponent } from './commponens/cars/cars.component';
+import { ClientDetailsComponent } from './commponens/client-details/client-details.component';
+import { FireExtinguishersComponent } from './commponens/fire-extinguishers/fire-extinguishers.component';
+import { ObservationComponent } from './commponens/observation/observation.component';
+import { FireResistantImpregnationComponent } from './commponens/fire-resistant-impregnation/fire-resistant-impregnation.component';
+import { FireHydrantComponent } from './commponens/fire-hydrant/fire-hydrant.component';
 
 
 @NgModule({
@@ -31,6 +38,14 @@ import { PositionComponent } from './commponens/position/position.component';
     UserProfileComponent,
     SimCardComponent,
     PositionComponent,
+    ClientsComponent,
+    CarsComponent,
+    ClientDetailsComponent,
+    FireExtinguishersComponent,
+    ObservationComponent,
+    FireResistantImpregnationComponent,
+    FireHydrantComponent,
+
   ],
   exports: [
     SidebarComponent,

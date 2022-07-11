@@ -16,13 +16,13 @@
 
         <mat-form-field class="full-width">
           <mat-label>Password</mat-label>
-          <div class="passButton">
-            <input class="login_input" matInput autocomplete="on" [type]=" showPassword ? 'text' : 'password' " placeholder="Password"
-                    formControlName="password" name="password">
-            <button class="login_button" mat-raised-button color="primary" (click)='showHidePassword()'> {{ showPassword ? 'Hide' : 'Show' }}
-              Password
-            </button>
-          </div>
+          <input class="login_input" matInput autocomplete="on" [type]=" showPassword ? 'text' : 'password' "
+                 placeholder="Password"
+                 formControlName="password" name="password">
+          <button mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="showPassword">
+            <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
 
         <mat-error *ngIf="emailError">The email or password was entered incorrectly</mat-error>

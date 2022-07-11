@@ -4,7 +4,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 
-import {IPosition} from "../../../../interfaces/position";
+import {IPosition} from "../../../../interfaces";
 import {PositionService} from "../../service";
 
 @Component({
@@ -98,4 +98,5 @@ export class PositionComponent implements OnInit {
     }
 
   }
+
 }

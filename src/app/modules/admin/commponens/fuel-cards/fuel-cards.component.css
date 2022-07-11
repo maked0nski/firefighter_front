@@ -9,6 +9,9 @@ mat-card{
 button {
   margin: 16px 7px;
 }
+.mat-header-row{
+  text-align: center;
+}
 /* Structure */
 table {
   width: 100%;

@@ -1,6 +1,9 @@
 mat-card{
   max-width: none;
 }
+/*.createContact .mat-form-field{*/
+/*  max-width: 100px;*/
+/*}*/
 .example-button-row {
   display: flex;
   align-items: center;

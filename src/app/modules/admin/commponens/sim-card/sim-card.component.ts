@@ -34,7 +34,6 @@ export class SimCardComponent implements OnInit {
       this.simCards = value['simCard'];
       this._createTable()
     })
-
     this._createForm()
   }
 
@@ -44,7 +43,7 @@ export class SimCardComponent implements OnInit {
     this.form = new FormGroup({
       number: new FormControl(null, Validators.required),
       operator: new FormControl(null, [Validators.required]),
-      active: new FormControl(false, Validators.required)
+      active: new FormControl(true, Validators.required)
     })
   }
 
@@ -97,8 +96,8 @@ export class SimCardComponent implements OnInit {
   delete(id: string) {
     this.simCardService.delete(id).subscribe(() => {
       const index = this.simCards.findIndex(card => card.id === Number(id));
-      this.simCards.splice(index, 1)
-      this._createTable()
+      this.simCards.splice(index, 1);
+      this._createTable();
     })
   }
 }
