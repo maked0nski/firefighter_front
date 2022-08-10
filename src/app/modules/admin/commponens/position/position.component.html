@@ -4,7 +4,6 @@
     <mat-card-subtitle>Тут виведений список посад на підприємстві.
     </mat-card-subtitle>
 
-
     <mat-accordion class="example-headers-align" multi>
       <mat-expansion-panel (closed)="false" #mapanel="matExpansionPanel">
         <mat-expansion-panel-header>
@@ -15,7 +14,7 @@
 
           <mat-panel-description>
             Тут можна додати додати посаду
-            <mat-icon>sim_card</mat-icon>
+            <mat-icon>assignment_ind</mat-icon>
           </mat-panel-description>
 
         </mat-expansion-panel-header>
@@ -36,13 +35,10 @@
       </mat-expansion-panel>
     </mat-accordion>
 
-
-
     <mat-form-field appearance="standard">
       <mat-label>Фільтр</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Введіть данні..." #input>
     </mat-form-field>
-
 
     <table mat-table [dataSource]="table" class="mat-elevation-z8">
 

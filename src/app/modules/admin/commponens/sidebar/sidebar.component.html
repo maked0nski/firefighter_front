@@ -3,7 +3,8 @@
 <!-- ============================================================== -->
 <div class="user-profile" style="background: url(assets/images/background/user-info.jpg) no-repeat;">
   <!-- User profile image -->
-  <a routerLink="/admin/userProfile"><div class="profile-img"   *ngIf="userData"> <img src="{{userData.image}}" alt="user"> </div></a>
+  <a routerLink="/admin/userProfile"><div class="profile-img"   *ngIf="userData"> <img  src="http://localhost:8080/users/avatar/{{userData.image}}" alt="user"> </div></a>
+
   <!-- User profile text-->
   <!-- ============================================================== -->
   <!-- Profile - style you can find in header.scss -->

@@ -5,7 +5,7 @@
     <mat-accordion>
 
 
-      <mat-expansion-panel hideToggle>
+      <mat-expansion-panel (opened)="_fildForm()" hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
             Об'єктовий номер: {{observation?.number}}
@@ -23,7 +23,7 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Об'єктовий номер:</mat-label>
-            <input matInput formControlName="number">
+            <input matInput [imask]="{mask: '0000'}" formControlName="number">
           </mat-form-field>
 
           <mat-form-field appearance="fill">

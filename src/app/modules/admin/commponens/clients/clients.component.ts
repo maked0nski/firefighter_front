@@ -1,10 +1,12 @@
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
+import {MatAccordion} from "@angular/material/expansion";
+import {MatDialog} from "@angular/material/dialog";
+import {ActivatedRoute} from "@angular/router";
+
 import {IClient} from "../../../../interfaces";
 import {ClientsService} from "../../service";
-import {ActivatedRoute} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MatAccordion} from "@angular/material/expansion";
 
 @Component({
   selector: 'app-client',
@@ -13,7 +15,7 @@ import {MatAccordion} from "@angular/material/expansion";
 })
 export class ClientsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'city', 'adress'];
+  displayedColumns: string[] = ['name', 'city', 'adress', 'delete'];
   table: MatTableDataSource<IClient>;
   arrey: IClient[];
   form: FormGroup;
@@ -22,7 +24,8 @@ export class ClientsComponent implements OnInit {
 
   constructor(
     private clientService: ClientsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog
   ) {
     activatedRoute.data.subscribe(value => {
       this.arrey = value['clients'];
@@ -63,4 +66,17 @@ export class ClientsComponent implements OnInit {
         this.form.reset();
       })
   }
+
+  delete(id: number,templateRef: any) {
+    console.log(id)
+    this.openDialog(templateRef)
+  }
+
+  openDialog(templateRef: any): void {
+    this.dialog.open(templateRef, {
+      width: '300px'
+    });
+  }
+
+
 }

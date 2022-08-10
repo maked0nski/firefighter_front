@@ -1,9 +1,7 @@
 mat-card{
   max-width: none;
 }
-/*.createContact .mat-form-field{*/
-/*  max-width: 100px;*/
-/*}*/
+
 .example-button-row {
   display: flex;
   align-items: center;
@@ -14,6 +12,10 @@ button {
 }
 .mat-header-row{
   text-align: center;
+}
+.mat-column-delete{
+  text-align: end;
+  width: 55px;
 }
 /* Structure */
 table {

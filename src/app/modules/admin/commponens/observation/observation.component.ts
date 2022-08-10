@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatAccordion} from "@angular/material/expansion";
 
 import {IClient, IObservation} from "../../../../interfaces";
 import {DataService} from "../../../../services";
 import {ObservationService} from "../../service";
-import {MatAccordion} from "@angular/material/expansion";
 
 @Component({
   selector: 'app-observation',
@@ -42,7 +42,6 @@ export class ObservationComponent implements OnInit {
   }
 
   edit() {
-
     if (this.observation && this.client?.id) {
       let data = {
         id: this.observation.id,
@@ -53,6 +52,18 @@ export class ObservationComponent implements OnInit {
       this.observationService
         .update(data.id, data)
     }
+  }
+
+  _fildForm(){
+    if (this.observation){
+      this.form.setValue({
+        number:this.observation.number,
+        contract:this.observation.contract,
+        sim_cardId:this.observation.sim_cardId,
+      })
+    }
 
   }
+
+
 }

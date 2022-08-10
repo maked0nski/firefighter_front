@@ -2,7 +2,7 @@
   <!--  <img mat-card-image src="assets/images/background/profile-bg.jpg" alt="Photo of a Shiba Inu">-->
   <mat-card-content>
     <div class="pro-img">
-      <img src="{{user.image}}" width="100" alt="user" class="img-circle">
+      <img src="http://localhost:8080/users/avatar/{{user.image}}" width="100" alt="user" class="img-circle">
     </div>
     <h2 class="m-b-0">{{user.surename ? user.surename : 'Не заповнено'}} {{user.name ? user.name : 'Не заповнено'}} {{user.fathersname ? user.fathersname : 'Не заповнено'}}</h2>
     <h4 class="m-t-0 ">Дата нородження: {{user.birthday ? user.birthday : 'Не заповнено'}}</h4>

@@ -30,4 +30,9 @@ export class UserProfileService {
     return this.httpClient.delete<void>(`${urls.users}/${id}`);
   }
 
+  // getAvatar(imagePath: string | undefined){
+  //
+  //   return this.httpClient.get(`${urls.users}/avatar/${imagePath}`)
+  // }
+
 }

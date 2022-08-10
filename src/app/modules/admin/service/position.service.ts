@@ -29,7 +29,7 @@ export class PositionService {
   }
 
   delete(id: string): Observable<void> {
-    return this.httpClient.delete<void>(id);
+    return this.httpClient.delete<void>(`${urls.position}/${id}`);
   }
 
 }

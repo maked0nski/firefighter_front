@@ -34,7 +34,6 @@ export class PositionComponent implements OnInit {
       this.positionList = value['positions'];
       this._createTable()
     })
-
     this._createForm()
   }
 
@@ -66,7 +65,7 @@ export class PositionComponent implements OnInit {
     this.pannel.open()
   }
 
-  delete(id: string) {
+  delete(id: string): void {
     this.positionService.delete(id).subscribe(() => {
       const index = this.positionList.findIndex(item => item.id === Number(id));
       this.positionList.splice(index, 1)
