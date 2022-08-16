@@ -26,7 +26,8 @@ export class CarsService {
   }
 
   update(id: number, dto: Partial<ICar>) {
-    return this.httpClient.patch<ICar>(urls.cars, dto);
+    console.log(dto)
+    return this.httpClient.patch<ICar>(`${urls.cars}/${id}`, dto);
   }
 
   delete(id: string): Observable<void> {

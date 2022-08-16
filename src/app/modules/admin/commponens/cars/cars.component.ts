@@ -1,10 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
-import {ICar} from "../../../../interfaces";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatExpansionPanel} from "@angular/material/expansion";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource} from "@angular/material/table";
 import {ActivatedRoute} from "@angular/router";
+
+import {ICar} from "../../../../interfaces";
 import {CarsService} from "../../service";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-cars',
@@ -12,8 +14,7 @@ import {CarsService} from "../../service";
   styleUrls: ['./cars.component.css']
 })
 export class CarsComponent implements OnInit {
-
-  displayedColumns: string[] = ['model', 'edit', 'delete'];
+  displayedColumns: string[] = ['model', 'insurance', 'edit', 'delete'];
 
   table: MatTableDataSource<ICar>;
 
@@ -31,12 +32,20 @@ export class CarsComponent implements OnInit {
   ) {
     activatedRoute.data.subscribe(value => {
       this.list = value['cars'];
-      this._createTable()
+      this._createTable();
     })
     this._createForm()
   }
 
   ngOnInit(): void {
+    //
+    //
+    // let day = this.currentDate.date();
+    // let month = this.currentDate.month()+1;
+    // let year = this.currentDate.year();
+    //
+    //
+
   }
 
   private _createForm(): void {
@@ -62,7 +71,7 @@ export class CarsComponent implements OnInit {
 
   save(): void {
 
-    if (!this.forUpdate){
+    if (!this.forUpdate) {
       this.carsService
         .create(this.form.getRawValue())
         .subscribe(value => {
@@ -72,6 +81,7 @@ export class CarsComponent implements OnInit {
           this.pannel?.close()
         })
     } else {
+
       this.carsService
         .update(this.forUpdate.id, this.form.getRawValue())
         .subscribe(value => {

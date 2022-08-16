@@ -14,7 +14,7 @@ import {PositionService} from "../../service";
 })
 export class PositionComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'position', 'edit', 'delete'];
+  displayedColumns: string[] = ['position', 'edit', 'delete'];
 
   table: MatTableDataSource<IPosition>;
 

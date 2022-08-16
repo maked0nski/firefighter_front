@@ -1,8 +1,8 @@
 <mat-card>
   <mat-card-content>
     <mat-card-title>Список автомобілів</mat-card-title>
-<!--    <mat-card-subtitle>Тут виведений список автомобілів на підприємстві.-->
-<!--    </mat-card-subtitle>-->
+    <!--    <mat-card-subtitle>Тут виведений список автомобілів на підприємстві.-->
+    <!--    </mat-card-subtitle>-->
 
     <mat-accordion class="example-headers-align" multi>
       <mat-expansion-panel (closed)="false" #mapanel="matExpansionPanel">
@@ -28,12 +28,16 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Модель</mat-label>
-            <input  matInput formControlName="model">
+            <input matInput formControlName="model">
           </mat-form-field>
 
           <mat-form-field appearance="fill">
+            <mat-select required formControlName="fuel">
+              <mat-option value="Бензин">Бензин</mat-option>
+              <mat-option value="Дизель">Дизель</mat-option>
+              <mat-option value="Газ">Газ</mat-option>
+            </mat-select>
             <mat-label>Паливо</mat-label>
-            <input matInput formControlName="fuel">
           </mat-form-field>
 
           <mat-form-field appearance="fill">
@@ -73,17 +77,32 @@
 
     <table mat-table [dataSource]="table" class="mat-elevation-z8">
 
-      <!-- Position column -->
+      <!-- Model column -->
       <ng-container matColumnDef="model">
         <th mat-header-cell *matHeaderCellDef>Модель</th>
-        <td mat-cell *matCellDef="let element" [routerLink]="[element.id]"> {{element.model}} </td>
+        <td mat-cell *matCellDef="let element" (click)="edit(element)"> {{element.model}} </td>
+      </ng-container>
+
+      <!-- Insurance column -->
+      <ng-container matColumnDef="insurance">
+        <th mat-header-cell *matHeaderCellDef>Страхівка дійсна до:</th>
+        <td mat-cell *matCellDef="let element" (click)="edit(element)">
+          <span
+            class="{{element.timeLeft > 30 ? 'normal' : 'red_Color'}}">
+            {{element.insurance}}
+          </span>
+          <span *ngIf="element.timeLeft <= 30" matBadge="{{element.timeLeft}}" matBadgeColor="warn"
+                matBadgeOverlap="false"></span>
+        </td>
       </ng-container>
 
       <!-- Edit Column -->
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef>Редагувати</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="primary" (click)="edit(element)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="primary" (click)="edit(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
 
           <!--          <button mat-raised-button (click)="edit(element) "> Редагувати</button>-->
         </td>
@@ -93,7 +112,9 @@
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef>Видалити</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="warn" (click)="delete(element.id)"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="delete(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
 
           <!--          <button mat-raised-button (click)="delete(element.id)"> Видалити</button>-->
         </td>

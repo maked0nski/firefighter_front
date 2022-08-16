@@ -25,6 +25,7 @@ import { FireExtinguishersComponent } from './commponens/fire-extinguishers/fire
 import { ObservationComponent } from './commponens/observation/observation.component';
 import { FireResistantImpregnationComponent } from './commponens/fire-resistant-impregnation/fire-resistant-impregnation.component';
 import { FireHydrantComponent } from './commponens/fire-hydrant/fire-hydrant.component';
+// import {MaterialFileInputModule} from "ngx-material-file-input";
 
 
 @NgModule({
@@ -50,15 +51,16 @@ import { FireHydrantComponent } from './commponens/fire-hydrant/fire-hydrant.com
   exports: [
     SidebarComponent,
   ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    MaterialModule,
-    SharedModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    IMaskModule
-  ],
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        MaterialModule,
+        SharedModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        IMaskModule,
+        // MaterialFileInputModule
+    ],
   providers: [
     FuelCardService,
     {
